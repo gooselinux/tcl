@@ -1,0 +1,13 @@
+diff -ruNp tcl8.5.7/generic/tclTrace.c tcl8.5.7-master/generic/tclTrace.c
+--- tcl8.5.7/generic/tclTrace.c	2008-10-08 16:52:39.000000000 +0200
++++ tcl8.5.7-master/generic/tclTrace.c	2009-08-06 09:43:03.000000000 +0200
+@@ -909,7 +909,8 @@ TraceVariableObjCmd(
+ 	    }
+ 	    ctvarPtr->traceCmdInfo.length = length;
+ 	    flags |= TCL_TRACE_UNSETS | TCL_TRACE_RESULT_OBJECT;
+-	    strcpy(ctvarPtr->traceCmdInfo.command, command);
++	    //strcpy(ctvarPtr->traceCmdInfo.command, command);
++        memcpy(ctvarPtr->traceCmdInfo.command, command, length + 1);
+ 	    ctvarPtr->traceInfo.traceProc = TraceVarProc;
+ 	    ctvarPtr->traceInfo.clientData = (ClientData)
+ 		    &ctvarPtr->traceCmdInfo;
